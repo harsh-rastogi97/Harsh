@@ -1,0 +1,30 @@
+
+public class IfDemo2 {
+
+	public static void main(String[] args) {
+
+		int a = 100;
+		int b = 200;
+		int c = 150;
+
+		if ((a > b) && (a > c)) {
+
+			System.out.println(a);
+
+		}
+
+		if ((b > a) && (b > c)) {
+
+			System.out.println(b);
+
+		}
+
+		if ((c > a) && (c > b)) {
+
+			System.out.println(c);
+
+		}
+
+	}
+
+}
