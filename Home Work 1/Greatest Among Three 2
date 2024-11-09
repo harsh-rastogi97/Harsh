@@ -1,0 +1,44 @@
+
+public class IfElseDemo {
+
+	public static void main(String[] args) {
+
+		int a = 100;
+		int b = 200;
+		int c = 150;
+		
+		if (a > b) {
+
+			if (a > c) {
+				
+				System.out.println("Greatest : " + a);
+			
+			}
+			
+			else {
+				
+				System.out.println("Greatest : " + c);
+				
+			}
+		
+		}
+		
+		else {
+			
+			if (b > c) {
+				
+				System.out.println("Greatest : " + b);
+
+			}
+			
+			else {
+				
+				System.out.println("Greatest : " + c);
+				
+			}
+		
+		}
+		
+	}
+
+}
