@@ -1,0 +1,122 @@
+Question 1-
+
+// Write a program to illustrate use of inheritance as parent child relationship.
+// Parent class :  User class with User details
+// Child class : child class of User having salary details of user.
+// Access parent class details using object of child class to print salary details of user.
+
+package lab_3;
+
+class User {			// Parent Class
+	// Attributes
+	String name;
+	int age;
+	String email;
+	
+	// Constructor
+	User(String name, int age, String email) {
+		// Assigning values to the Attributes
+		this.name = name;
+		this.age = age;
+		this.email = email;
+	}
+	
+	void displayUserInfo() {
+		// Print User details
+		System.out.println("Name: " + name);
+		System.out.println("Age: " + age);
+		System.out.println("Email: " + email);
+	}
+}
+
+class SalaryDetails extends User {		// Child class inheriting parent class
+	// Attribute
+	double salary;
+	
+	// Constructor
+	SalaryDetails(String name, int age, String email, double salary) {
+		// Calling parent class constructor using super
+		super(name,age,email);
+		// Assigning value to the attribute
+		this.salary = salary;
+	}
+	
+	// Method to display all the details
+	void displayAllDetails() {
+		displayUserInfo();			// Calling parent class method
+		System.out.println("Salary: " + salary);
+	}
+}
+
+public class Inheritance {
+
+	public static void main(String[] args) {
+		// Creating an object of child class
+		SalaryDetails u1 = new SalaryDetails("Anudip", 28, "anudip248@gmail.com", 45000.00);
+		
+		// Accessing the methods
+		u1.displayAllDetails();
+	}
+}
+
+
+OUTPUT-
+Name: Anudip
+Age: 28
+Email: anudip248@gmail.com
+Salary: 45000.0
+
+
+
+Question 2-
+
+// Write a program to check leap year using if else.
+
+package lab_3;
+
+import java.util.Scanner;
+
+public class LeapYear {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		try {
+			
+			// Taking input from user
+			System.out.print("Enter an year: ");
+			int year = sc.nextInt();
+			
+			// Checking all the conditions for finding the leap year
+			// How to check whether a given year is a leap year or not.
+			// If a year is exactly divisible by 4 and not divisible by 100, then it is a leap year. Or if a year is exactly divisible by 400 then it is a leap year.
+			if(((year % 4) == 0 && (year % 100) != 0) || (year % 400) == 0) {
+				
+				System.out.println("It is a Leap Year");
+			}
+			
+			else {
+				
+				System.out.println("It is not a Leap Year");
+			}
+		}
+		
+		catch(Exception e) {
+			
+			System.out.println(e);
+		}
+		
+		finally {
+			
+			// Closing the Scanner
+			sc.close();
+		}
+	}
+}
+
+
+OUTPUT-
+Enter an year: 2024
+It is a Leap Year
+

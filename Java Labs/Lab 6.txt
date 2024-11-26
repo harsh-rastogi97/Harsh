@@ -1,0 +1,119 @@
+Question 1-
+
+// Create a Book class with bookId, bookName and authorName.Create parameterized constructor to initialize the object.
+// Create an ArrayList of type Book and store all book objects into collections and display all book details
+
+package lab_6;
+
+import java.util.ArrayList;
+
+// Book class
+class Book {
+	int bookId;
+	String bookName;
+	String authorName;
+
+	// Parameterized constructor to initialize the Book object
+	public Book(int bookId, String bookName, String authorName) {
+		this.bookId = bookId;
+		this.bookName = bookName;
+		this.authorName = authorName;
+	}
+
+	// Method to display book details
+	public void displayBookDetails() {
+		System.out.println("Book ID: " + bookId);
+		System.out.println("Book Name: " + bookName);
+		System.out.println("Author Name: " + authorName);
+		System.out.println("---------------------------------");
+	}
+}
+
+public class BookArrayList {
+
+	public static void main(String[] args) {
+		// Creating an ArrayList to store Book objects
+		ArrayList<Book> books = new ArrayList<>();
+
+		// Adding book objects to the ArrayList using the parameterized constructor
+		books.add(new Book(101, "Think and Grow Rich", "Napoleon Hill"));
+		books.add(new Book(102, "The Alchemist", "Paulo Coelho"));
+		books.add(new Book(103, "The Power of Habit", "Charles Duhigg"));
+		books.add(new Book(104, "Pride and Prejudice", "Jane Austen"));
+
+		// Iterating through the ArrayList to display all book details
+		System.out.println("--------- Book Details -----------\n");
+		for (Book book : books) {
+			book.displayBookDetails();
+		}
+	}
+}
+
+
+OUTPUT-
+--------- Book Details -----------
+
+Book ID: 101
+Book Name: Think and Grow Rich
+Author Name: Napoleon Hill
+---------------------------------
+Book ID: 102
+Book Name: The Alchemist
+Author Name: Paulo Coelho
+---------------------------------
+Book ID: 103
+Book Name: The Power of Habit
+Author Name: Charles Duhigg
+---------------------------------
+Book ID: 104
+Book Name: Pride and Prejudice
+Author Name: Jane Austen
+---------------------------------
+
+
+
+Question 2-
+
+// create ArrayList with few even and odd members in it. Write a Java program that calculates the sum of all even numbers present in an ArrayList of integers.
+
+package lab_6;
+
+import java.util.ArrayList;
+
+public class EvenSum {
+	// Method to calculate the sum of even numbers in the ArrayList
+    public static int calculateEvenSum(ArrayList<Integer> nums) {
+        int sum = 0;
+
+        // Iterate through the ArrayList and check for even numbers
+        for (int num : nums) {
+            if ((num & 1) == 0) {  // If the number is even
+                sum += num;      // Add it to the sum
+            }
+        }
+        // Return the calculated sum
+        return sum;
+	}
+    
+	public static void main(String[] args) {
+		 // Create an ArrayList with a mix of even and odd numbers
+        ArrayList<Integer> nums = new ArrayList<>();
+        nums.add(18);
+        nums.add(15);
+        nums.add(22);
+        nums.add(31);
+        nums.add(59);
+        nums.add(46);
+        nums.add(60);
+        nums.add(37);
+
+        // Call the method to calculate the sum of even numbers
+        int sum = calculateEvenSum(nums);
+        // Display the sum of even numbers
+        System.out.println("The sum of all even numbers is: " + sum);
+    }
+}
+
+
+OUTPUT-
+The sum of all even numbers is: 146

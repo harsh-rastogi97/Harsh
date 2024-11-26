@@ -1,0 +1,133 @@
+Question 1-
+
+// Write a Java program to associate the specified value with the specified key in a HashMap. Declare HashMap add 10 values as user input.
+
+package lab_8;
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class HashMapTest {
+
+	public static void main(String[] args) {
+		// Create a HashMap to store key-value pairs (Integer, String)
+        HashMap<Integer, String> map = new HashMap<>();
+
+        // Create a Scanner object for taking user input
+        Scanner sc = new Scanner(System.in);
+
+        try {
+        	// Take 10 user inputs for keys and values
+            for (int i = 0; i < 10; i++) {
+                System.out.print("Key (integer) for entry " + (i + 1) + ": ");
+                int key = sc.nextInt();  // Read the key
+
+                // Clear the buffer before reading the next line (since nextInt() does not consume newline)
+                sc.nextLine(); 
+
+                System.out.print("Value (string) for entry " + (i + 1) + ": ");
+                String value = sc.nextLine();  // Read the value
+
+                // Add the key-value pair to the HashMap
+                map.put(key, value);
+            }
+
+            // Display the content of the HashMap
+            System.out.print("\nHash Map content:");
+                System.out.println(map);
+        }
+        catch(Exception e) {
+        	// Print exception message
+        	System.out.println(e.getMessage());
+        }
+        finally {
+            // Close the scanner
+            sc.close();
+        }
+    }
+}
+
+
+OUTPUT-
+Key (integer) for entry 1: 1
+Value (string) for entry 1: A
+Key (integer) for entry 2: 2
+Value (string) for entry 2: B
+Key (integer) for entry 3: 3
+Value (string) for entry 3: C
+Key (integer) for entry 4: 4
+Value (string) for entry 4: D
+Key (integer) for entry 5: 5
+Value (string) for entry 5: E
+Key (integer) for entry 6: 6
+Value (string) for entry 6: F
+Key (integer) for entry 7: 7
+Value (string) for entry 7: G
+Key (integer) for entry 8: 8
+Value (string) for entry 8: H
+Key (integer) for entry 9: 9
+Value (string) for entry 9: I
+Key (integer) for entry 10: 10
+Value (string) for entry 10: J
+
+Hash Map content:{1=A, 2=B, 3=C, 4=D, 5=E, 6=F, 7=G, 8=H, 9=I, 10=J}
+
+
+
+Question 2-
+
+//Write a Java program to check whether a HashMap contains key-value mappings (empty) or not
+
+package lab_8;
+
+import java.util.HashMap;
+
+public class HashMapTest2 {
+
+	public static void main(String[] args) {
+		// Create a HashMap to store key-value pairs
+        HashMap<Integer, String> map = new HashMap<>();
+
+        // Print HashMap before adding any element
+        System.out.println("Hash Map: " + map);
+        
+        // Check if the HashMap is empty
+        if (map.isEmpty()) {
+            System.out.println("The HashMap is empty.");
+        }
+        else {
+            System.out.println("The HashMap is not empty.");
+        }
+
+        // Adding some elements to the HashMap
+        map.put(1, "Iron Man");
+        map.put(2, "Spider Man");
+        map.put(3, "Batman");
+
+        // Print HashMap after adding elements
+        System.out.println("Hash Map: " + map);
+        
+        // Check again if the HashMap is empty
+        if (map.isEmpty()) {
+            System.out.println("The HashMap is empty.");
+        }
+        else {
+            System.out.println("The HashMap is not empty.");
+        }
+
+        // Check if a specific key-value mapping exists
+        if (map.containsKey(2) && map.containsValue("Spider Man")) {
+            System.out.println("The map contains key 2 with value 'Spider Man'.");
+        } else {
+            System.out.println("The map does not contain key 2 with value 'Spider Man'.");
+        }
+	}
+}
+
+
+OUTPUT-
+Hash Map: {}
+The HashMap is empty.
+Hash Map: {1=Iron Man, 2=Spider Man, 3=Batman}
+The HashMap is not empty.
+The map contains key 2 with value 'Spider Man'.

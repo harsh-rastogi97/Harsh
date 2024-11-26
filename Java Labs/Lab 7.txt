@@ -1,0 +1,82 @@
+Question 1-
+
+// Write a Java program to append the specified element to the end of a HashSet. (use add() method)
+
+package lab_7;
+
+import java.util.HashSet;
+
+public class HashSetAddElement {
+	public static void main(String[] args) {
+		// Create a HashSet of integers
+        HashSet<Integer> nums = new HashSet<>();
+
+        // Add some elements to the HashSet
+        nums.add(1);
+        nums.add(2);
+        nums.add(3);
+        nums.add(4);
+
+        // Display the current elements in the HashSet
+        System.out.println("Original HashSet: " + nums);
+
+        // Append a new element to the HashSet
+        boolean isAdded = nums.add(5);
+
+        // Display the result
+        if (isAdded) {
+            System.out.println("Element 5 was successfully added.");
+        }
+        else {
+            System.out.println("Element 5 is already present in the HashSet.");
+        }
+
+        // Display the HashSet after adding the new element
+        System.out.println("Updated HashSet: " + nums);
+	}
+}
+
+
+OUTPUT-
+Original HashSet: [1, 2, 3, 4]
+Element 5 was successfully added.
+Updated HashSet: [1, 2, 3, 4, 5]
+
+
+
+Question 2-
+
+// Write a program to declare stack. Store 10 elements into it. display stack elements. Remove 4 elements from stack and display it again
+
+package lab_7;
+
+import java.util.Stack;
+
+public class StackTest {
+
+	public static void main(String[] args) {
+		// Create a Stack to store integers
+		Stack<Integer> stack = new Stack<>();
+		
+		// Add 10 elements to the stack
+		for (int i = 1; i <= 10; i++) {
+			stack.push(i); // Pushing elements into the stack
+		}
+
+		// Display the stack elements after adding
+		System.out.println("Stack elements: " + stack);
+
+		// Remove 4 elements from the stack
+		for (int i = 1; i <= 4; i++) {
+			stack.pop(); // Removing the top element from the stack
+		}
+
+		// Display the stack elements after removing 4 elements
+		System.out.println("Stack after removing 4 elements: " + stack);
+	}
+}
+
+
+OUTPUT-
+Stack elements: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Stack after removing 4 elements: [1, 2, 3, 4, 5, 6]

@@ -1,0 +1,133 @@
+Question 1-
+
+package lab_10;
+
+// Create a custom thread class by extending the Thread class
+class Demo extends Thread {
+	// Using constructor to name the thread
+	public Demo(String name) {
+			super(name);
+	}
+		
+	@Override
+	public void run() {
+		// Print numbers from 0 to 4
+		for (int i = 0; i <= 4; i++) {
+			System.out.println(i + " Thread: " + Thread.currentThread().getName());
+		}
+	}
+}
+
+public class ThreadTest {
+
+	public static void main(String[] args) {
+		// Create a thread object
+		Demo printer = new Demo("printer");
+
+		// Print the name of the thread
+		System.out.println("Thread: " + Thread.currentThread().getName());
+				
+		// Start the thread
+		printer.start();
+
+		try {
+			// Main thread can wait for the child thread to finish
+            printer.join();
+        }
+		catch (InterruptedException e) {
+            System.out.println("Main thread interrupted: " + e.getMessage());
+        }
+		
+		System.out.println("Thread execution completed!");
+	}
+}
+
+
+OUTPUT-
+Thread: main
+0 Thread: printer
+1 Thread: printer
+2 Thread: printer
+3 Thread: printer
+4 Thread: printer
+Thread execution completed!
+
+
+
+Question 2-
+
+package lab_10;
+
+// Create a custom thread class by extending the Thread class
+class Demo2 extends Thread {
+	// Using constructor to name the thread
+	public Demo2(String name) {
+		super(name);
+	}
+	
+	@Override
+	public void run() {
+		// Print numbers from 1 to 10 with a 1000ms (1 second) delay between each
+		for (int i = 1; i <= 10; i++) {
+			System.out.println(i);
+			// Print the name of the thread
+			System.out.println("Thread: " + Thread.currentThread().getName());
+			try {
+				// Sleep for 1000 milliseconds (1 second)
+				Thread.sleep(1000);
+			}
+			catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+}
+
+public class ThreadTest2 {
+
+	public static void main(String[] args) {
+		// Create a thread object
+		Demo2 printer = new Demo2("printer");
+
+		// Print the name of the thread
+		System.out.println("Thread: " + Thread.currentThread().getName());
+
+		// Start the thread
+		printer.start();
+		
+		try {
+			// Main thread can wait for the child thread to finish
+            printer.join();
+        }
+		catch (InterruptedException e) {
+            System.out.println("Main thread interrupted: " + e.getMessage());
+        }
+		
+		System.out.println("Thread execution completed!");
+	}
+}
+
+
+OUTPUT-
+Thread: main
+1
+Thread: printer
+2
+Thread: printer
+3
+Thread: printer
+4
+Thread: printer
+5
+Thread: printer
+6
+Thread: printer
+7
+Thread: printer
+8
+Thread: printer
+9
+Thread: printer
+10
+Thread: printer
+Thread execution completed!

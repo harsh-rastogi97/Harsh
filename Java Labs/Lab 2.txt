@@ -1,0 +1,73 @@
+Question 1-
+
+// Write a program to input two numbers and find the maximum between two numbers using the conditional/ternary operator.
+
+import java.util.Scanner;
+
+public class GreatestBetweenTwo {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		try {
+			
+			// Taking two numbers from the user
+			System.out.print("Enter First Number: ");
+			int a = sc.nextInt();
+			
+			System.out.print("Enter Second Number: ");
+			int b = sc.nextInt();
+			
+			// Finding the maximum between the two numbers
+			int max = (a > b)? a : b;
+			System.out.println(max + " is maximum between the two numbers");
+		}
+		catch(Exception e) {
+			
+			System.out.println(e);
+		}
+		finally {
+			
+			// Closing the Scanner
+			sc.close();
+		}
+	}
+}
+
+
+OUTPUT-
+Enter First Number: 523
+Enter Second Number: 286
+523 is maximum between the two numbers
+
+
+
+Question 2-
+
+// Write a program to declare a variable for integer number. Assign a value to it and shift it to left and right using shift operators.
+// You can use shift by 1 place, shift by 2 places. Print output for both left & right shifts.
+
+public class ShiftOperator {
+
+	public static void main(String[] args) {
+		
+		// Shift operator takes binary version of the number and shifts the bit to specified number of places
+		int num = 100;
+		
+		// Shift by 1 place
+		System.out.println("Right Shift by 1 place: " + (num >> 1));
+		System.out.println("Left Shift by 1 place: " + (num << 1));
+		
+		// Shift by 2 place
+		System.out.println("Right Shift by 2 place: " + (num >> 2));
+		System.out.println("Left Shift by 2 place: " + (num << 2));
+	}
+}
+
+
+OUTPUT-
+Right Shift by 1 place: 50
+Left Shift by 1 place: 200
+Right Shift by 2 place: 25
+Left Shift by 2 place: 400

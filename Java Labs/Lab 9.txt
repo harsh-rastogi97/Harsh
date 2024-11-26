@@ -1,0 +1,176 @@
+Question 1-
+
+// Create a HashMap as phonedirectory. Add entries in phonedirectory as  id, name and number.
+// With user input take name of a user and search in phonedirectory.
+// Display result whether name is available in phonedirectory or not using HashMap methods.
+
+package lab_9;
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class PhoneDirectory {
+
+    public static void main(String[] args) {
+        // Create the phone directory as a HashMap with ID as key and name & number as value
+        HashMap<Integer, String> phoneDirectory = new HashMap<>();
+
+        // Scanner for user input
+        Scanner sc = new Scanner(System.in);
+
+        try {
+        	// Add some entries to the phone directory (id, name, number)
+            phoneDirectory.put(1, "Aman: 96349-57284");
+            phoneDirectory.put(2, "Rajat: 80375-35789");
+            phoneDirectory.put(3, "Karan: 98535-41327");
+
+            // Ask the user for a name to search
+            System.out.print("Enter the name to search in the phone directory: ");
+            String search = sc.nextLine();
+
+            // Flag to check if name is found
+            boolean isFound = false;
+
+            // Search through the phone directory
+            for (String entry : phoneDirectory.values()) {
+                if (entry.toLowerCase().contains(search.toLowerCase())) {
+                    System.out.println(entry);
+                    isFound = true;
+                    break;
+                }
+            }
+
+            // If name was not found, display appropriate message
+            if (!isFound) {
+                System.out.println("Name not found in the phone directory.");
+            }
+        }
+        catch(Exception e) {
+        	// Print exception message
+        	System.out.println(e.getMessage());
+        }
+        finally {
+        	// Close the scanner
+        	sc.close();
+        }
+    }
+}
+
+
+OUTPUT-
+Enter the name to search in the phone directory: Rajat
+Rajat: 80375-35789
+
+
+
+Question 2-
+
+// Create a TreeMap as userdetails. Add entries in   userdetails  as name and age.
+// create methods as add users, search users in userdetails with exit method as well.
+// Display result as menu to work on all userdetails methods
+
+package lab_9;
+
+import java.util.Scanner;
+import java.util.TreeMap;
+
+public class UserDetails {
+	// TreeMap to store user details
+	private TreeMap<String, Integer> userDetails = new TreeMap<>();
+
+	// Method to add user details
+	public void addUser(String name, int age) {
+		userDetails.put(name, age);
+		System.out.println(name + " added successfully.");
+	}
+
+	// Method to search for a user by name
+	public void searchUser(String name) {
+		// if the name (key) has a mapping then user is present, else not present
+		if (userDetails.containsKey(name)) {
+			System.out.println("Found user: " + name + " with age: " + userDetails.get(name));
+		}
+		else {
+			System.out.println("User not found.");
+		}
+	}
+
+	public static void main(String[] args) {
+		UserDetails user = new UserDetails();
+		Scanner sc = new Scanner(System.in);
+		
+		try {
+			int choice;
+
+			do {
+				// Display the menu
+				System.out.println("\n----- User Details Menu -----");
+				System.out.println("1. Add User");
+				System.out.println("2. Search User");
+				System.out.println("3. Exit");
+				System.out.print("Please choose an option (1-3): ");
+				choice = sc.nextInt();
+				sc.nextLine(); // Consume the newline character
+
+				switch (choice) {
+				case 1:
+					// Add user
+					System.out.print("Enter name: ");
+					String name = sc.nextLine();
+					System.out.print("Enter age: ");
+					int age = sc.nextInt();
+					user.addUser(name, age);
+					break;
+				case 2:
+					// Search user
+					System.out.print("Enter name to search: ");
+					String nameToSearch = sc.nextLine();
+					user.searchUser(nameToSearch);
+					break;
+				case 3:
+					// Exit the program
+					System.out.println("Exiting program...");
+					System.exit(0);
+					break;
+				default:
+					System.out.println("Invalid choice, please try again.");
+				}
+			} while (choice != 3); // Repeat until the user chooses to exit
+		}
+		catch (Exception e) {
+			// Print exception message
+			System.out.println(e.getMessage());
+		}
+		finally {
+			// Close the scanner
+			sc.close();
+		}
+	}
+}
+
+
+OUTPUT-
+
+----- User Details Menu -----
+1. Add User
+2. Search User
+3. Exit
+Please choose an option (1-3): 1
+Enter name: Anudip
+Enter age: 23
+Anudip added successfully.
+
+----- User Details Menu -----
+1. Add User
+2. Search User
+3. Exit
+Please choose an option (1-3): 2
+Enter name to search: Anudip
+Found user: Anudip with age: 23
+
+----- User Details Menu -----
+1. Add User
+2. Search User
+3. Exit
+Please choose an option (1-3): 3
+Exiting program...
