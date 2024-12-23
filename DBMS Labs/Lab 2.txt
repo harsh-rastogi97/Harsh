@@ -1,0 +1,176 @@
+Question 1-
+
+Create a Customer Table:
+create table Customer(customer_id int primary key,first_name varchar(20),Last_name varchar(30));
+
+and Orders Table as :
+create table Orders(order_id int primary key,order_date date,Total_amount int,customer_id int,foreign key(customer_id) references Customer(customer_id));
+
+insert 5 records in each table.
+Perform inner join to fetch all records from both tables. use condition as same id from both table.
+
+
+QUERY-
+
+-- Create Customer table
+CREATE TABLE Customer (
+    customer_id INT PRIMARY KEY,
+    first_name VARCHAR(20),
+    Last_name VARCHAR(30)
+);
+
+-- Create Orders table
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY,
+    order_date DATE,
+    Total_amount INT,
+    customer_id INT,
+    FOREIGN KEY (customer_id)
+        REFERENCES Customer (customer_id)
+);
+
+-- Insert 5 records in the Customer table
+INSERT INTO Customer (customer_id, first_name, Last_name) VALUES
+(1, 'Arun', 'Singh'),
+(2, 'Neha', 'Patel'),
+(3, 'Raj', 'Kumar'),
+(4, 'Pooja', 'Gupta'),
+(5, 'Vikas', 'Sharma');
+
+-- Select all the attributes of the Customer table
+SELECT * FROM Customer;
+
+-- Insert 5 records in the Orders table
+INSERT INTO Orders (order_id, order_date, Total_amount, customer_id) VALUES
+(101, '2024-11-01', 1500, 3),
+(102, '2024-11-05', 2300, 4),
+(103, '2024-11-10', 1200, 1),
+(104, '2024-11-15', 1800, 5),
+(105, '2024-11-20', 2200, 2);
+
+-- Select all the attributes of the Orders table
+SELECT * FROM Orders;
+
+-- Fetch all the records from both table using Inner Join
+SELECT
+	c.customer_id,
+    	c.first_name,
+    	c.Last_name,
+    	o.order_id,
+    	o.order_date,
+    	o.Total_amount
+FROM Customer c INNER JOIN Orders o
+ON c.customer_id = o.customer_id;
+
+
+OUTPUT-
+
+customer_id	first_name	Last_name
+1		Arun		Singh
+2		Neha		Patel
+3		Raj		Kumar
+4		Pooja		Gupta
+5		Vikas		Sharma
+
+order_id	order_date	Total_amount	customer_id
+101		2024-11-01	1500		3
+102		2024-11-05	2300		4
+103		2024-11-10	1200		1
+104		2024-11-15	1800		5
+105		2024-11-20	2200		2
+
+
+customer_id	first_name	Last_name	order_id	order_date	Total_amount
+1		Arun		Singh		103		2024-11-10	1200
+2		Neha		Patel		105		2024-11-20	2200
+3		Raj		Kumar		101		2024-11-01	1500
+4		Pooja		Gupta		102		2024-11-05	2300
+5		Vikas		Sharma		104		2024-11-15	1800
+
+
+
+Question 2-
+
+create a Department Table:
+create table Department(department_id int primary key,department_name varchar(30));
+
+and Employees Table as : 
+Create table Employees(employee_id int primary key,first_name varchar(30),last_name varchar(30),department_id int,foreign key(department_id) references Department(department_id));
+
+insert 5 records in each table
+perform left join on same id from both tables and fetch all records from both table.
+
+
+QUERY-
+
+-- Create Department table
+CREATE TABLE Department (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(30)
+);
+
+-- Create Employees table
+CREATE TABLE Employees (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(30),
+    last_name VARCHAR(30),
+    department_id INT,
+    FOREIGN KEY (department_id)
+        REFERENCES Department (department_id)
+);
+
+-- Insert 5 records in the Department table
+INSERT INTO Department (department_id, department_name) VALUES
+(1, 'HR'),
+(2, 'Finance'),
+(3, 'Engineering'),
+(4, 'Sales'),
+(5, 'Marketing');
+
+-- Select all the attributes of the Department table
+SELECT * FROM Department;
+
+-- Insert 5 records in the Employees table
+INSERT INTO Employees (employee_id, first_name, last_name, department_id) VALUES
+(101, 'Amit', 'Tandon', 5),
+(102, 'Priyanka', 'Patil', 2),
+(103, 'Rajvir', 'Kumar', 1),
+(104, 'Niharika', 'Gupta', 3),
+(105, 'Supriya', 'Singh', 4);
+
+-- Select all the attributes of the Employees table
+SELECT * FROM Employees;
+
+-- Fetch all the records from both table using Left Join
+SELECT
+	e.employee_id,
+	e.first_name,
+	e.last_name,
+	d.department_id,
+	d.department_name
+FROM Employees e LEFT JOIN Department d
+ON e.department_id = d.department_id;
+
+
+OUTPUT-
+
+department_id	department_name
+1		HR
+2		Finance
+3		Engineering
+4		Sales
+5		Marketing
+
+employee_id	first_name	last_name	department_id
+101		Amit		Tandon		5
+102		Priyanka	Patil		2
+103		Rajvir		Kumar		1
+104		Niharika	Gupta		3
+105		Supriya		Singh		4
+
+employee_id	first_name	last_name	department_id	department_name
+101		Amit		Tandon		5		Marketing
+102		Priyanka	Patil		2		Finance
+103		Rajvir		Kumar		1		HR
+104		Niharika	Gupta		3		Engineering
+105		Supriya		Singh		4		Sales

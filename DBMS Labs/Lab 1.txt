@@ -1,0 +1,84 @@
+Question 1-
+
+create a table client_master as :
+
+ClientNo varchar(6)Primary Key,
+Name varchar(20)not null,
+Address1 varchar(30)not null,
+Address2 varchar(30) not null,
+City varchar(15) not null,
+Pincode int not null,
+State varchar(15) not null,
+BalDue varchar(20) not null
+
+Enter 5 records in this table 
+Select query to execute and check all inserted records.
+
+
+QUERY-
+
+-- Create client_master table
+CREATE TABLE client_master (
+    ClientNo VARCHAR(6) PRIMARY KEY,
+    Name VARCHAR(20) NOT NULL,
+    Address1 VARCHAR(30) NOT NULL,
+    Address2 VARCHAR(30) NOT NULL,
+    City VARCHAR(15) NOT NULL,
+    Pincode INT NOT NULL,
+    State VARCHAR(15) NOT NULL,
+    BalDue VARCHAR(20) NOT NULL
+);
+
+-- Insert 5 records in the client_master table
+INSERT INTO client_master (ClientNo, Name, Address1, Address2, City, Pincode, State, BalDue) VALUES
+('C00001', 'Ravi Kumar', '123 MG Road', 'Flat 4B', 'Mumbai', 400001, 'Maharashtra', '500'),
+('C00002', 'Anjali Sharma', '456 LBS Nagar', 'Building 3, Floor 5', 'Delhi', 110001, 'Delhi', '1200'),
+('C00003', 'Suresh Patel', '789 Gandhi Marg', 'House No. 12', 'Ahmedabad', 380001, 'Gujarat', '300'),
+('C00004', 'Priya Reddy', '101 Indira Street', 'Flat 2A', 'Bengaluru', 560001, 'Karnataka', '850'),
+('C00005', 'Amit Verma', '234 Nehru Avenue', 'Bldg D, 2nd Floor', 'Chennai', 600001, 'Tamil Nadu', '450');
+
+-- Select all the attributes of the client_master table
+SELECT * FROM client_master;
+
+
+OUTPUT-
+
+ClientNo	Name		Address1		Address2		City		Pincode		State		BalDue
+C00001		Ravi Kumar	123 MG Road		Flat 4B			Mumbai		400001		Maharashtra	500
+C00002		Anjali Sharma	456 LBS Nagar		Building 3, Floor 5	Delhi		110001		Delhi		1200
+C00003		Suresh Patel	789 Gandhi Marg		House No. 12		Ahmedabad	380001		Gujarat		300
+C00004		Priya Reddy	101 Indira Street	Flat 2A			Bengaluru	560001		Karnataka	850
+C00005		Amit Verma	234 Nehru Avenue	Bldg D, 2nd Floor	Chennai		600001		Tamil Nadu	450
+
+
+
+Question 2-
+
+Use Update command to change records  of address2 for all entries.
+
+
+QUERY-
+
+-- Update the Address2 attribute of all the records in the client_master table
+UPDATE client_master
+SET Address2 = 
+    CASE 
+        WHEN ClientNo = 'C00001' THEN 'Flat 8A'
+        WHEN ClientNo = 'C00002' THEN 'Building 2, Floor 9'
+        WHEN ClientNo = 'C00003' THEN 'House No. 30'
+        WHEN ClientNo = 'C00004' THEN 'Flat 8E'
+        WHEN ClientNo = 'C00005' THEN 'Bldg H, 7th Floor'
+    END;
+
+-- Select all the attributes of the client_master table
+SELECT * FROM client_master;
+
+
+OUTPUT-
+
+ClientNo	Name		Address1		Address2		City		Pincode		State		BalDue
+C00001		Ravi Kumar	123 MG Road		Flat 8A			Mumbai		400001		Maharashtra	500
+C00002		Anjali Sharma	456 LBS Nagar		Building 2, Floor 9	Delhi		110001		Delhi		1200
+C00003		Suresh Patel	789 Gandhi Marg		House No. 30		Ahmedabad	380001		Gujarat		300
+C00004		Priya Reddy	101 Indira Street	Flat 8E			Bengaluru	560001		Karnataka	850
+C00005		Amit Verma	234 Nehru Avenue	Bldg H, 7th Floor	Chennai		600001		Tamil Nadu	450

@@ -1,0 +1,180 @@
+# Perform insert, update delete and create on student database
+
+Question 1-
+
+// Write a program to insert data of a customer in database.
+// use  customer data and perform database connectivity operation
+
+package Lab_4;
+
+import java.sql.*;
+import java.util.Scanner;
+
+public class InsertDB {
+
+	public static void main(String[] args) {
+		// Database URL, username, and password
+		String url = "jdbc:mysql://localhost:3306/student";
+		String user = "root";
+		String password = "har@12345";
+
+        	// SQL query to insert record into "customers" table
+        	String query = "INSERT INTO customers (cust_id, cust_name, cust_email, cust_phone) VALUES (?, ?, ?, ?)";
+
+	        // Initialize connection and prepared statement objects
+        	Connection con = null;
+        	PreparedStatement pstmt = null;
+        
+        	// Create Scanner object
+        	Scanner sc = new Scanner(System.in);
+        
+        	try {
+            		// Load the MySQL JDBC driver
+            		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		        // Establish the connection
+        	    	con = DriverManager.getConnection(url, user, password);
+
+		        // Prepare the statement
+        	    	pstmt = con.prepareStatement(query);
+
+	         	// Set the values for the placeholders
+        	    	System.out.println("Enter customer details,");
+            		System.out.print("ID: ");
+            		pstmt.setInt(1, sc.nextInt());
+	            	System.out.print("Name: ");
+        	    	pstmt.setString(2, sc.next());
+            		System.out.print("Email: ");
+	            	pstmt.setString(3, sc.next());
+        	    	System.out.print("Phone: ");
+            		pstmt.setString(4, sc.next());
+
+	            	// Execute the query
+        	    	int rowsAffected = pstmt.executeUpdate();
+            
+            		// Check if the insertion was successful
+         		if (rowsAffected > 0)
+                		System.out.println("Insertion Successfull!");
+            		else
+                		System.out.println("Insertion Failed!");
+        	}
+        	catch (ClassNotFoundException e) {
+            		System.out.println("MySQL JDBC Driver not found. Please include it in the classpath.");
+            		e.printStackTrace();
+        	}
+        	catch (SQLException e) {
+            		System.out.println("Error executing SQL query.");
+            		e.printStackTrace();
+        	}
+        	finally {
+        		// Close the scanner
+        		sc.close();
+        	
+            		// Close the connection
+        		if (con != null) {
+        			try {
+                    			con.close();
+        			}
+        			catch (SQLException e) {
+                			System.out.println("Error while closing the connection.");
+                			e.printStackTrace();
+        			}
+        		}
+        	}
+	}
+}
+
+
+OUTPUT-
+
+Enter customer details,
+ID: 051
+Name: Rahul
+Email: rahulgarg25@gmail.com
+Phone: 9936538473
+Insertion Successfull!
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 2-
+
+// Write a program to delete data of a customer from database.
+// use customer data and perform database connectivity operation.
+// delete records using customer ID.
+
+package Lab_4;
+
+import java.sql.*;
+import java.util.Scanner;
+
+public class DeleteDB {
+
+	public static void main(String[] args) {
+		// Database URL, username, and password
+		String url = "jdbc:mysql://localhost:3306/student";
+		String user = "root";
+		String password = "har@12345";
+
+		// SQL query to insert record into "customers" table
+		String query = "DELETE FROM customers WHERE cust_id = ?";
+
+		// Initialize connection and prepared statement objects
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		// Create Scanner object
+		Scanner sc = new Scanner(System.in);
+
+		try {
+			// Load the MySQL JDBC driver
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// Establish the connection
+			con = DriverManager.getConnection(url, user, password);
+
+			// Prepare the statement
+			pstmt = con.prepareStatement(query);
+
+			// Set the ID for deletion
+			System.out.print("Enter customer ID for deletion: ");
+			pstmt.setInt(1, sc.nextInt());
+
+			// Execute the query
+			int rowsAffected = pstmt.executeUpdate();
+
+			// Check if the deletion was successful
+			if (rowsAffected > 0)
+				System.out.println("Deletion Successfull!");
+			else
+				System.out.println("Customer not found!");
+		}
+		catch (ClassNotFoundException e) {
+			System.out.println("MySQL JDBC Driver not found. Please include it in the classpath.");
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			System.out.println("Error executing SQL query.");
+			e.printStackTrace();
+		}
+		finally {
+			// Close the scanner
+			sc.close();
+
+			// Close the connection
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					System.out.println("Error while closing the connection.");
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+}
+
+
+OUTPUT-
+
+Enter customer ID for deletion: 51
+Deletion Successfull!

@@ -1,0 +1,236 @@
+Question 1-
+
+'student' table:-
+
+rollno	name		address		phone		age
+-----------------------------------------------------------
+1	harsh		delhi		857070477	18
+2	prateek		bihar		557070477	19
+3	riyanka		silioguri	667070477	20
+4	deep		ramnagar	997070477	18
+5	saptarshi	kolkata		337070477	19
+6	dhanraj		barbazar	984552862	20
+7	rohit		balurghat	937070477	18
+8	niraj		alipur		997070477	19
+
+
+// Write a program with Java database connectivity to insert data in MySQL database using prepared statement only.
+// You can take random data attributes of a student or employee to insert into table.
+
+package Lab_6;
+
+import java.sql.*;
+import java.util.Scanner;
+
+public class StudentInsert {
+	public static void main(String[] args) {
+		// Database URL, username, and password
+		String url = "jdbc:mysql://localhost:3306/batch8359";
+		String user = "root";
+		String password = "har@12345";
+
+		// SQL query to insert record into "student" table
+		String query = "INSERT INTO student (rollno, name, address, phone, age) VALUES (?, ?, ?, ?, ?)";
+
+		// Initialize connection and prepared statement objects
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		// Create Scanner object
+		Scanner sc = new Scanner(System.in);
+
+		try {
+			// Load the MySQL JDBC driver
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// Establish the connection
+			con = DriverManager.getConnection(url, user, password);
+
+			// Prepare the statement
+			pstmt = con.prepareStatement(query);
+
+			// Set the values for the placeholders
+			System.out.println("Enter student information,");
+			System.out.print("Roll No: ");
+			pstmt.setInt(1, sc.nextInt());
+			System.out.print("Name: ");
+			pstmt.setString(2, sc.next());
+			System.out.print("Address: ");
+			pstmt.setString(3, sc.next());
+			System.out.print("Phone: ");
+			pstmt.setString(4, sc.next());
+			System.out.print("Age: ");
+			pstmt.setInt(5, sc.nextInt());
+
+			// Execute the query
+			int rowsAffected = pstmt.executeUpdate();
+
+			// Check if the insertion was successful
+			if (rowsAffected > 0)
+				System.out.println("Insertion Successfull!");
+			else
+				System.out.println("Insertion Failed!");
+		}
+		catch (ClassNotFoundException e) {
+			System.out.println("MySQL JDBC Driver not found. Please include it in the classpath.");
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			System.out.println("Error executing SQL query.");
+			e.printStackTrace();
+		}
+		finally {
+			// Close the scanner
+			sc.close();
+
+			// Close resources
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+
+OUTPUT-
+
+Enter student information,
+Roll No: 9
+Name: Kailash
+Address: Banaras
+Phone: 9754673728
+Age: 22
+Insertion Successfull!
+
+
+rollno	name		address		phone		age
+-----------------------------------------------------------
+1	harsh		delhi		857070477	18
+2	prateek		bihar		557070477	19
+3	riyanka		silioguri	667070477	20
+4	deep		ramnagar	997070477	18
+5	saptarshi	kolkata		337070477	19
+6	dhanraj		barbazar	984552862	20
+7	rohit		balurghat	937070477	18
+8	niraj		alipur		997070477	19
+9	Kailash		Banaras		9754673728	22
+
+*****************************************************************************************************************************************************
+
+Question 2-
+
+SQL-
+
+CREATE TABLE employee (
+	eid INT PRIMARY KEY AUTO_INCREMENT,
+    ename VARCHAR(20) NOT NULL,
+    eage INT, 
+    esalary DOUBLE NOT NULL
+);
+
+DELIMITER //
+CREATE PROCEDURE insert_employee(IN emp_name VARCHAR(20), IN emp_age INT, IN emp_salary DOUBLE)
+BEGIN
+    INSERT INTO employee (ename, eage, esalary) VALUES (emp_name, emp_age, emp_salary);
+END //
+DELIMITER ;
+
+
+// Write a program with Java database connectivity to insert data in MySQL database using callable statement only.
+// You can take  random data attributes of a student or employee to insert into table.
+
+package Lab_6;
+
+import java.sql.*;
+import java.util.Scanner;
+
+public class EmployeeInsert {
+	public static void main(String[] args) {
+		// Database URL, username, and password
+		String url = "jdbc:mysql://localhost:3306/batch8359";
+		String user = "root";
+		String password = "har@12345";
+
+		// SQL query to insert record into "" table
+		String query = "{CALL insert_employee(?, ?, ?)}";
+
+		// Initialize connection and Callable statement objects
+		Connection con = null;
+		CallableStatement cstmt = null;
+
+		// Create Scanner object
+		Scanner sc = new Scanner(System.in);
+
+		try {
+			// Load the MySQL JDBC driver
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// Establish the connection
+			con = DriverManager.getConnection(url, user, password);
+
+			// Prepare the call
+			cstmt = con.prepareCall(query);
+
+			// Set the values for the placeholders
+			System.out.println("Enter employee information,");
+			System.out.print("Name: ");
+			cstmt.setString(1, sc.next());
+			System.out.print("Age: ");
+			cstmt.setInt(2, sc.nextInt());
+			System.out.print("Salary: ");
+			cstmt.setDouble(3, sc.nextDouble());
+
+			// Execute the query
+			int rowsAffected = cstmt.executeUpdate();
+
+			// Check if the insertion was successful
+			if (rowsAffected > 0)
+				System.out.println("Insertion Successfull!");
+			else
+				System.out.println("Insertion Failed!");
+		}
+		catch (ClassNotFoundException e) {
+			System.out.println("MySQL JDBC Driver not found. Please include it in the classpath.");
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			System.out.println("Error executing SQL query.");
+			e.printStackTrace();
+		}
+		finally {
+			// Close the scanner
+			sc.close();
+
+			// Close resources
+			try {
+				if (cstmt != null)
+					cstmt.close();
+				if (con != null)
+					con.close();
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+
+OUTPUT-
+
+Enter employee information,
+Name: Anudip
+Age: 27
+Salary: 30000.00
+Insertion Successfull!
+
+
+eid	ename	eage	esalary
+-------------------------------
+1	Anudip	27	30000
